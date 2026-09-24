@@ -32,6 +32,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const asset = (file: string) => `${base}/assets/${file}`;
 const whatsapp = 'https://wa.me/5565992199578';
 const whatsappLink = (message?: string) => `${whatsapp}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
+const gestoronSignatureImage = 'http://anzolin.adv.br/wp-content/uploads/2026/05/Maison__16_-removebg-preview-e1778691824313.png';
 
 const relationshipMessage = 'Olá, Val! Quero salvar meu relacionamento e gostaria de saber como funciona o atendimento.';
 const separationMessage = 'Olá, Val! Preciso de ajuda para me curar dessa separação e gostaria de agendar uma conversa.';
@@ -97,10 +98,7 @@ function Footer() {
       <div className="footer-credit">
         <p className="footer-copy">© 2026 Val Fernandes. Todos os direitos reservados.</p>
         <a className="gestoron-signature" href="https://gestoron.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Desenvolvido e hospedado por Gestoron" data-testid="link-gestoron">
-          <span className="gestoron-top-area">
-            <span className="gestoron-mark" aria-hidden="true">G</span>
-            <span className="gestoron-dynamic-text">Gestoron</span>
-          </span>
+          <img className="gestoron-signature-image" src={gestoronSignatureImage} alt="Gestoron" />
           <span className="gestoron-static-text">Desenvolvido e hospedado por</span>
         </a>
       </div>
@@ -558,10 +556,7 @@ function ServicePage({ kind }: { kind: ServiceKind }) {
       <footer className="service-footer">
         <span>© 2026 Val Fernandes. Todos os direitos reservados.</span>
         <a className="gestoron-signature" href="https://gestoron.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Desenvolvido e hospedado por Gestoron" data-testid={`link-gestoron-${kind}`}>
-          <span className="gestoron-top-area">
-            <span className="gestoron-mark" aria-hidden="true">G</span>
-            <span className="gestoron-dynamic-text">Gestoron</span>
-          </span>
+          <img className="gestoron-signature-image" src={gestoronSignatureImage} alt="Gestoron" />
           <span className="gestoron-static-text">Desenvolvido e hospedado por</span>
         </a>
       </footer>
