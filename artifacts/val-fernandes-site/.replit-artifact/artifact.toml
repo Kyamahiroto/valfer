@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Val Fernandes"
+description = "Landing page e páginas de serviços da Val Fernandes, com conteúdo de acolhimento emocional, CTAs para WhatsApp e assinatura no rodapé."
+version = "1.0.0"
+id = "artifacts/val-fernandes-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23854
+
+[services.development]
+run = "pnpm --filter @workspace/val-fernandes-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/val-fernandes-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/val-fernandes-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23854"
+BASE_PATH = "/"

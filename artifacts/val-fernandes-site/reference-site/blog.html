@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog de Val Fernandes — Artigos sobre Psicanálise, Hipnoterapia Clínica, Inteligência Emocional e Desenvolvimento Humano.">
+  <title>Blog | Val Fernandes</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/logo-small.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/site.css">
+  
+  <style>
+    .blog-page-hero {
+      background: linear-gradient(180deg, #fdfbf7 0%, #f6f1e7 100%);
+      padding: 80px max(24px, calc((100% - 1140px)/2)) 40px;
+      text-align: center;
+    }
+    .blog-page-hero h1 {
+      font-size: 48px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .blog-page-hero p {
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--text-muted);
+    }
+    .filter-search-container {
+      max-width: 1140px;
+      margin: 30px auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .filter-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .filter-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .filter-tag:hover, .filter-tag.active {
+      background: var(--gold-primary);
+      border-color: var(--gold-primary);
+      color: #fff;
+    }
+    .search-box {
+      position: relative;
+      max-width: 320px;
+      width: 100%;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 36px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .search-box input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 10px rgba(189, 148, 70, 0.1);
+    }
+    .search-box svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+    }
+    .blog-container {
+      padding: 0 max(24px, calc((100% - 1140px)/2)) 80px;
+    }
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+    @media (max-width: 768px) {
+      .filter-search-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        max-width: 100%;
+      }
+      .blog-page-hero h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="site-header">
+    <a class="logo-container" href="/">
+      <svg class="logo-icon" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="goldGradLogo" x1="20%" y1="0%" x2="80%" y2="100%">
+            <stop offset="0%" stop-color="#f0d68a" />
+            <stop offset="30%" stop-color="#d4a84b" />
+            <stop offset="60%" stop-color="#b8872e" />
+            <stop offset="100%" stop-color="#8a6318" />
+          </linearGradient>
+        </defs>
+        <path d="M60 28 C60 28, 45 8, 25 18 C5 28, 8 55, 15 67 C22 79, 48 98, 60 108 C72 98, 98 79, 105 67 C112 55, 115 28, 95 18 C75 8, 60 28, 60 28 Z" fill="url(#goldGradLogo)"/>
+        <path d="M60 38 C60 38, 49 22, 34 30 C19 38, 21 58, 27 67 C33 76, 50 90, 60 98 C70 90, 87 76, 93 67 C99 58, 101 38, 86 30 C71 22, 60 38, 60 38 Z" fill="#fdfbf7"/>
+        <path d="M60 44 C60 44, 51 30, 39 36 C27 42, 28 58, 33 66 C38 74, 52 86, 60 93 C68 86, 82 74, 87 66 C92 58, 93 42, 81 36 C69 30, 60 44, 60 44 Z" fill="url(#goldGradLogo)"/>
+        <path d="M60 52 C60 52, 54 41, 45 46 C36 51, 37 62, 40 67 C44 73, 54 82, 60 86 C66 82, 76 73, 80 67 C83 62, 84 51, 75 46 C66 41, 60 52, 60 52 Z" fill="#fdfbf7"/>
+        <rect x="56" y="105" width="8" height="34" rx="2" fill="url(#goldGradLogo)"/>
+        <rect x="64" y="116" width="12" height="6" rx="1.5" fill="url(#goldGradLogo)"/>
+        <rect x="64" y="128" width="8" height="5" rx="1.5" fill="url(#goldGradLogo)"/>
+      </svg>
+      <div class="logo-text">
+        <strong>Val Fernandes</strong>
+        <span>Inteligência Emocional</span>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="/#inicio" class="nav-link">Sobre</a></li>
+      <li><a href="https://valfernandes.com.br/processo-terapeutico" class="nav-link" target="_blank" rel="noopener">Processo Terapêutico</a></li>
+      <li><a href="https://valfernandes.com.br/mentoria" class="nav-link" target="_blank" rel="noopener">Mentoria Academia da Mente</a></li>
+      <li><a href="/blog.html" class="nav-link">Blog</a></li>
+      <li><a href="/#contato" class="nav-link">Contato</a></li>
+    </ul>
+    <a class="header-cta whatsapp-link" href="https://wa.me/5565992199578" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      Agendar conversa
+    </a>
+    <button class="menu-toggle" aria-label="Menu">☰</button>
+  </header>
+
+  <main>
+    <!-- Blog Hero -->
+    <section class="blog-page-hero">
+      <h1>Artigos &amp; Reflexões</h1>
+      <p>Conteúdo exclusivo para apoiar sua jornada de autoconhecimento, inteligência emocional e cura interna.</p>
+    </section>
+
+    <!-- Filters & Search -->
+    <section class="filter-search-container">
+      <div class="filter-tags" id="categories-filter">
+        <button class="filter-tag active" data-category="all">Todos</button>
+      </div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" placeholder="Pesquisar artigos...">
+      </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="blog-container">
+      <div class="blog-grid" id="blog-posts">
+        <!-- Rendered dynamically by site.js -->
+      </div>
+      <div id="no-results-msg" class="no-results" style="display: none;">
+        Nenhum artigo encontrado para a busca selecionada.
+      </div>
+    </section>
+
+    <!-- Modal for article contents -->
+    <div id="article-modal" class="modal-overlay" style="display:none;">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <a class="logo-container" href="/">
+      <svg class="logo-icon" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="goldGradFooterLogo" x1="20%" y1="0%" x2="80%" y2="100%">
+            <stop offset="0%" stop-color="#f0d68a" />
+            <stop offset="30%" stop-color="#d4a84b" />
+            <stop offset="60%" stop-color="#b8872e" />
+            <stop offset="100%" stop-color="#8a6318" />
+          </linearGradient>
+        </defs>
+        <path d="M60 28 C60 28, 45 8, 25 18 C5 28, 8 55, 15 67 C22 79, 48 98, 60 108 C72 98, 98 79, 105 67 C112 55, 115 28, 95 18 C75 8, 60 28, 60 28 Z" fill="url(#goldGradFooterLogo)"/>
+        <path d="M60 38 C60 38, 49 22, 34 30 C19 38, 21 58, 27 67 C33 76, 50 90, 60 98 C70 90, 87 76, 93 67 C99 58, 101 38, 86 30 C71 22, 60 38, 60 38 Z" fill="#fdfbf7"/>
+        <path d="M60 44 C60 44, 51 30, 39 36 C27 42, 28 58, 33 66 C38 74, 52 86, 60 93 C68 86, 82 74, 87 66 C92 58, 93 42, 81 36 C69 30, 60 44, 60 44 Z" fill="url(#goldGradFooterLogo)"/>
+        <path d="M60 52 C60 52, 54 41, 45 46 C36 51, 37 62, 40 67 C44 73, 54 82, 60 86 C66 82, 76 73, 80 67 C83 62, 84 51, 75 46 C66 41, 60 52, 60 52 Z" fill="#fdfbf7"/>
+        <rect x="56" y="105" width="8" height="34" rx="2" fill="url(#goldGradFooterLogo)"/>
+        <rect x="64" y="116" width="12" height="6" rx="1.5" fill="url(#goldGradFooterLogo)"/>
+        <rect x="64" y="128" width="8" height="5" rx="1.5" fill="url(#goldGradFooterLogo)"/>
+      </svg>
+      <div class="logo-text">
+        <strong>Val Fernandes</strong>
+        <span>Inteligência Emocional</span>
+      </div>
+    </a>
+    <p class="footer-copy">© <span id="year">2026</span> Val Fernandes. Todos os direitos reservados.</p>
+    <ul class="footer-links">
+      <li><a href="/politica-de-privacidade.html">Políticas de Privacidade</a></li>
+      <li><a href="/termos-de-uso.html">Termos de Uso</a></li>
+    </ul>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a class="whatsapp-float whatsapp-link" href="https://wa.me/5565992199578" target="_blank" rel="noopener" aria-label="Falar com Val Fernandes pelo WhatsApp">
+    <div class="whatsapp-pulse"></div>
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="white">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+  </a>
+
+  <!-- Main JavaScript File -->
+  <script src="/site.js"></script>
+</body>
+</html>

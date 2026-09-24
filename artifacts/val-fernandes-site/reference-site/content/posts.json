@@ -1,0 +1,31 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Como a Hipnoterapia Pode Destravar Padrões Subconscientes",
+      "category": "Hipnoterapia",
+      "excerpt": "Entenda como o acesso ao subconsciente permite ressignificar traumas antigos e criar novas programações mentais saudáveis.",
+      "image": "/assets/expert2.jpeg",
+      "date": "10 de Agosto, 2026",
+      "content": "Muitas das nossas reações automáticas, medos e bloqueios têm origem em memórias guardadas no subconsciente. A hipnoterapia clínica é uma ferramenta terapêutica de alta precisão que permite acessar esses registros de forma segura e acolhedora.\n\nDurante o processo, o paciente permanece em estado de relaxamento profundo e foco direcionado, mantendo o controle total da sua mente. É nesse estado que conseguimos desarmar crenças limitantes sobre valor próprio, fracasso ou rejeição, substituindo-as por sentimentos de capacidade, paz e segurança."
+    },
+    {
+      "id": 2,
+      "title": "Ansiedade Generalizada: Compreendendo os Sinais do Seu Corpo",
+      "category": "Ansiedade & Pânico",
+      "excerpt": "A ansiedade não é um inimigo, mas um alerta do seu corpo. Saiba como a Psicanálise ajuda a identificar as causas profundas.",
+      "image": "/assets/expert.png",
+      "date": "04 de Agosto, 2026",
+      "content": "Taquicardia, pensamentos acelerados, sensação de aperto no peito e preocupação constante com o futuro são sintomas frequentes da Ansiedade Generalizada e da Síndrome do Pânico.\n\nAtravés da Psicanálise Clínica, buscamos não apenas aliviar os sintomas, mas compreender o que o seu inconsciente está tentando expressar. Ao dar voz a emoções reprimidas e feridas não curadas, a necessidade do sintoma ansioso se dissipa, devolvendo a tranquilidade ao seu dia a dia."
+    },
+    {
+      "id": 3,
+      "title": "Feridas Emocionais da Infância e Seus Impactos nas Relações",
+      "category": "Relacionamentos",
+      "excerpt": "Abandono, rejeição e traição no passado costumam se repetir nos relacionamentos adultos. Aprenda a quebrar esse ciclo.",
+      "image": "/assets/testimonials/testimonial_4.png",
+      "date": "28 de Julho, 2026",
+      "content": "Quando carregamos feridas emocionais de rejeição, abandono ou traição, é comum desenvolvermos comportamentos defensivos nos relacionamentos adultos — como ciúme excessivo, medo da intimidade ou dependência emocional.\n\nCom a Terapia Sistêmica e a Reprogramação de Crenças, investigamos a dinâmica familiar e os padrões inconscientes para que você possa estabelecer limites saudáveis, cultivar a autoestima e construir relações baseadas no respeito e no amor autêntico."
+    }
+  ]
+}

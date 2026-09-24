@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento Confirmado | Val Fernandes</title>
+  <link rel="icon" type="image/png" href="/assets/logo-small.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fdfbf7 0%, #f6f1e7 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      max-width: 520px;
+      width: 100%;
+      padding: 56px 48px;
+      text-align: center;
+    }
+    .icon-wrapper {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4caf50, #2e7d32);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      animation: popIn 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    .icon-wrapper svg { width: 44px; height: 44px; stroke: #fff; }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: #1a1a1a;
+      margin-bottom: 14px;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .details {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+    .details p { font-size: 14px; color: #555; margin-bottom: 6px; }
+    .details p:last-child { margin-bottom: 0; }
+    .details strong { color: #1a1a1a; }
+    .badge {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #d4a84b, #b8872e);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 36px;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(212,168,75,0.35);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,168,75,0.45); }
+    .whatsapp-link {
+      display: block;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #25d366;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .whatsapp-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon-wrapper">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <span class="badge">✅ Pagamento Aprovado</span>
+    <h1>Parabéns!</h1>
+    <p class="subtitle">
+      Seu pagamento foi confirmado com sucesso.<br>
+      Você receberá as informações de acesso no seu e-mail em breve.
+    </p>
+
+    <div class="details" id="payment-details">
+      <p><strong>Produto:</strong> Imersão Destrave Emocional</p>
+      <p><strong>Valor:</strong> R$ 147,00</p>
+      <p id="payment-id-line" style="display:none;"><strong>ID do Pagamento:</strong> <span id="payment-id-val"></span></p>
+      <p id="payment-method-line" style="display:none;"><strong>Método:</strong> <span id="payment-method-val"></span></p>
+    </div>
+
+    <a href="/" class="btn">Voltar ao Site</a>
+    <a href="https://wa.me/556593411073?text=Olá!%20Acabei%20de%20confirmar%20meu%20pagamento%20da%20Imersão%20Destrave%20Emocional%20e%20gostaria%20de%20receber%20as%20informações%20de%20acesso."
+       class="whatsapp-link" target="_blank" rel="noopener">
+      💬 Entrar em contato pelo WhatsApp
+    </a>
+  </div>
+
+  <script>
+    // Preencher detalhes do pagamento a partir da URL
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const paymentId = params.get('payment_id');
+      const paymentType = params.get('payment_type');
+
+      if (paymentId) {
+        document.getElementById('payment-id-val').textContent = paymentId;
+        document.getElementById('payment-id-line').style.display = 'block';
+      }
+
+      if (paymentType) {
+        const methods = {
+          'pix': 'PIX',
+          'debit_card': 'Cartão de Débito',
+          'checkout': 'Checkout Mercado Pago'
+        };
+        document.getElementById('payment-method-val').textContent = methods[paymentType] || paymentType;
+        document.getElementById('payment-method-line').style.display = 'block';
+      }
+    })();
+  </script>
+</body>
+</html>

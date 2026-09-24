@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /api/
+
+# Bloquear acesso direto ao config.php
+RewriteRule ^config\.php$ - [F,L]
+
+# Rota: GET /api/status?id=X → status.php
+RewriteRule ^status$ status.php [L,QSA]
+
+# Rota: POST /api/create_preference → create_preference.php
+RewriteRule ^create_preference$ create_preference.php [L,QSA]
+
+# Rota: POST /api/pay/pix → pay/pix.php
+RewriteRule ^pay/pix$ pay/pix.php [L,QSA]
+
+# Rota: POST /api/pay/debit → pay/debit.php
+RewriteRule ^pay/debit$ pay/debit.php [L,QSA]
+</IfModule>
+
+# Bloquear listagem de diretórios
+Options -Indexes

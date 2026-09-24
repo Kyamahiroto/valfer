@@ -1,0 +1,34 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# Serve indexantigo.html (React app) for specific Landing Pages
+# [NC] = case insensitive, [L] = last rule, stops processing further rules
+RewriteRule ^(processo-terapeutico|mentoria)/?$ /indexantigo.html [L,NC]
+
+# Bloquear acesso direto ao indexantigo.html pelo navegador (mas permitir rewrite interno)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^indexantigo\.html$ - [F,L]
+
+# Página de sucesso de pagamento
+RewriteRule ^sucesso/?$ /sucesso.html [L,QSA]
+
+# API de pagamento — rotear para arquivos PHP
+RewriteRule ^api/pay/pix$ /api/pay/pix.php [L,QSA]
+RewriteRule ^api/pay/debit$ /api/pay/debit.php [L,QSA]
+RewriteRule ^api/status$ /api/status.php [L,QSA]
+RewriteRule ^api/create_preference$ /api/create_preference.php [L,QSA]
+
+RewriteRule ^index\.html$ - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+</IfModule>
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Defina o pacote “ea-php80” como a linguagem padrão de programação “PHP”.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php80___lsphp .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
