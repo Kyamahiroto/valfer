@@ -4,19 +4,16 @@ import {
   Activity,
   ArrowRight,
   Brain,
-  Camera,
   Check,
   ChevronLeft,
   ChevronRight,
   CircleUserRound,
   Compass,
   Heart,
-  Instagram,
   LineChart,
   Mail,
   MapPin,
   Menu,
-  MessageCircle,
   Phone,
   Search,
   ShieldCheck,
@@ -59,7 +56,11 @@ function Logo({ compact = false }: { compact?: boolean }) {
 }
 
 function WhatsAppIcon({ size = 17 }: { size?: number }) {
-  return <MessageCircle size={size} strokeWidth={2.3} aria-hidden="true" />;
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+    </svg>
+  );
 }
 
 function Header() {
@@ -296,15 +297,36 @@ function Home() {
         <section className="instagram-section-wrapper" id="instagram">
           <h2>Me acompanhe no Instagram</h2>
           <p>Conteúdos diários sobre mente, emoções e desenvolvimento pessoal.</p>
-          <div className="insta-grid">
-            {['instagram_cozy_room.png', 'instagram_meditation.png', 'instagram_tea_book.png', 'instagram_plant.png', 'instagram_smiling_woman.png', 'instagram_writing_candle.png'].map((image, index) => (
-              <a className="insta-link-card" href="https://www.instagram.com/valfernandes.oficial/" target="_blank" rel="noopener noreferrer" key={image} data-testid={`link-instagram-image-${index + 1}`}>
-                <img src={asset(image)} alt={['Sala de atendimento aconchegante', 'Mulher meditando ao pôr do sol', 'Chá e caderno aberto', 'Planta em luz de sol', 'Dra. Val Fernandes', 'Vela e caderno'][index]} />
-                <span className="insta-hover-overlay"><Camera size={24} aria-hidden="true" /></span>
-              </a>
-            ))}
+          <div id="instagram-widget-container">
+            <div className="insta-grid">
+              {[
+                ['instagram_cozy_room.png', 'Sala de atendimento aconchegante'],
+                ['instagram_meditation.png', 'Mulher meditando ao pôr do sol'],
+                ['instagram_tea_book.png', 'Chá e caderno aberto'],
+                ['instagram_plant.png', 'Planta em luz de sol'],
+                ['instagram_smiling_woman.png', 'Dra Val Fernandes'],
+                ['instagram_writing_candle.png', 'Vela e caderno'],
+              ].map(([image, alt], index) => (
+                <a className="insta-link-card" href="https://www.instagram.com/valfernandes.oficial/" target="_blank" rel="noopener" key={image} data-testid={`link-instagram-image-${index + 1}`}>
+                  <img src={asset(image)} alt={alt} />
+                  <span className="insta-hover-overlay">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                      <circle cx="12" cy="13" r="4" />
+                    </svg>
+                  </span>
+                </a>
+              ))}
+            </div>
+            <a className="button instagram-outline-button" id="instagram-link" href="https://www.instagram.com/valfernandes.oficial/" target="_blank" rel="noopener" data-testid="link-instagram-profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+              Ver no Instagram
+            </a>
           </div>
-          <a className="button instagram-outline-button" href="https://www.instagram.com/valfernandes.oficial/" target="_blank" rel="noopener noreferrer" data-testid="link-instagram-profile"><Instagram size={16} /> Ver no Instagram</a>
         </section>
 
         <section className="section blog-section-wrapper" id="artigos">
@@ -331,42 +353,57 @@ function Home() {
 
 function RelationshipAppeals() {
   return (
-    <section className="relationship-section" id="relacionamentos">
-      <div className="relationship-intro">
-        <span className="eyebrow">Um cuidado para o seu momento</span>
-        <h2>Nem toda dor precisa terminar em adeus.</h2>
-        <p>Existe um caminho possível para olhar para o que está acontecendo com honestidade, cuidado e direção.</p>
-      </div>
-      <div className="appeal-grid">
-        <article className="appeal-card">
-          <h3>Você sofre dentro da relação, mas não quer terminar?</h3>
-          <p>Quando ainda existe amor, mas a comunicação se perdeu, os conflitos se repetem e você se sente sozinha dentro da própria história, é hora de buscar apoio. Um espaço seguro para compreender a dinâmica do casal, cuidar das feridas e reconstruir a conexão.</p>
-          <ul className="outcomes">
-            <li>Clareza sobre o que está acontecendo</li>
-            <li>Comunicação mais consciente</li>
-            <li>Reconexão e intimidade</li>
-            <li>Decisões tomadas com segurança</li>
-          </ul>
-          <a className="button" href={whatsappLink(relationshipMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-relationship-whatsapp"><WhatsAppIcon /> Quero cuidar da minha relação</a>
-        </article>
-        <article className="appeal-card secondary">
-          <h3>Você está sofrendo depois de uma separação?</h3>
-          <p>O fim de uma relação pode deixar silêncio, culpa, saudade e a sensação de que você perdeu a si mesma. O acompanhamento acolhe essa dor sem apressar o seu tempo e ajuda você a atravessar o luto com presença.</p>
-          <ul className="outcomes">
-            <li>Acolhimento para a dor do luto</li>
-            <li>Reconstrução da autoestima</li>
-            <li>Encerramento de ciclos</li>
-            <li>Liberdade para recomeçar</li>
-          </ul>
-          <a className="button" href={whatsappLink(separationMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-separation-whatsapp"><WhatsAppIcon /> Quero me cuidar depois da separação</a>
-        </article>
-      </div>
-      <div className="unifying-close">
-        <h2>Você não precisa atravessar isso sozinha.</h2>
-        <p>O primeiro passo não precisa ser grande. Precisa ser possível, seguro e seu.</p>
-        <a className="button" href={whatsappLink(welcomeMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-welcome-session"><WhatsAppIcon /> Agendar minha sessão de acolhimento</a>
-      </div>
-    </section>
+    <>
+      <section className="relationship-appeal relationship-appeal--relationship" id="relacionamentos">
+        <div className="appeal-layout">
+          <div className="appeal-visual">
+            <span className="eyebrow">Um cuidado para o seu momento</span>
+            <div className="appeal-visual-icon"><Heart size={58} strokeWidth={1.25} /></div>
+            <p>Quando ainda existe amor, buscar apoio também é uma forma de cuidar da história que vocês construíram.</p>
+          </div>
+          <article className="appeal-content">
+            <span className="eyebrow">Para quem está dentro da relação</span>
+            <h2>Você sofre dentro da relação, mas não quer terminar?</h2>
+            <p>Quando ainda existe amor, mas a comunicação se perdeu, os conflitos se repetem e você se sente sozinha dentro da própria história, é hora de buscar apoio. Um espaço seguro para compreender a dinâmica do casal, cuidar das feridas e reconstruir a conexão.</p>
+            <ul className="outcomes">
+              <li>Clareza sobre o que está acontecendo</li>
+              <li>Comunicação mais consciente</li>
+              <li>Reconexão e intimidade</li>
+              <li>Decisões tomadas com segurança</li>
+            </ul>
+            <a className="button" href={whatsappLink(relationshipMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-relationship-whatsapp"><WhatsAppIcon /> Quero cuidar da minha relação</a>
+          </article>
+        </div>
+      </section>
+      <section className="relationship-appeal relationship-appeal--separation" id="separacao">
+        <div className="appeal-layout">
+          <article className="appeal-content">
+            <span className="eyebrow">Para quem está recomeçando</span>
+            <h2>Você está sofrendo depois de uma separação?</h2>
+            <p>O fim de uma relação pode deixar silêncio, culpa, saudade e a sensação de que você perdeu a si mesma. O acompanhamento acolhe essa dor sem apressar o seu tempo e ajuda você a atravessar o luto com presença.</p>
+            <ul className="outcomes">
+              <li>Acolhimento para a dor do luto</li>
+              <li>Reconstrução da autoestima</li>
+              <li>Encerramento de ciclos</li>
+              <li>Liberdade para recomeçar</li>
+            </ul>
+            <a className="button" href={whatsappLink(separationMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-separation-whatsapp"><WhatsAppIcon /> Quero me cuidar depois da separação</a>
+          </article>
+          <div className="appeal-visual appeal-visual--soft">
+            <span className="eyebrow">Um novo começo também precisa de acolhimento</span>
+            <div className="appeal-visual-icon"><Sparkles size={58} strokeWidth={1.25} /></div>
+            <p>Você pode atravessar o luto com presença, recuperar sua autoestima e abrir espaço para uma vida mais leve.</p>
+          </div>
+        </div>
+      </section>
+      <section className="unifying-close-section">
+        <div className="unifying-close">
+          <h2>Você não precisa atravessar isso sozinha.</h2>
+          <p>O primeiro passo não precisa ser grande. Precisa ser possível, seguro e seu.</p>
+          <a className="button" href={whatsappLink(welcomeMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-welcome-session"><WhatsAppIcon /> Agendar minha sessão de acolhimento</a>
+        </div>
+      </section>
+    </>
   );
 }
 
