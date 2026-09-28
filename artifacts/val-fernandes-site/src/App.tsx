@@ -25,7 +25,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFoundFallback from '@/pages/not-found';
-import { Link, Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
+import { Link, Route, Switch, Router as WouterRouter, useLocation, useParams } from 'wouter';
 
 const queryClient = new QueryClient();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -98,7 +98,9 @@ function Footer() {
       <div className="footer-credit">
         <p className="footer-copy">© 2026 Val Fernandes. Todos os direitos reservados.</p>
         <a className="gestoron-signature" href="https://gestoron.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Desenvolvido e hospedado por Gestoron" data-testid="link-gestoron">
-          <img className="gestoron-signature-image" src={gestoronSignatureImage} alt="Gestoron" />
+          <span className="gestoron-top-area">
+            <img className="gestoron-signature-image" src={gestoronSignatureImage} alt="Gestoron" />
+          </span>
           <span className="gestoron-static-text">Desenvolvido e hospedado por</span>
         </a>
       </div>
@@ -176,9 +178,28 @@ const reviews = [
   ['Rodrigo Santos', '02/02/2025', 'testimonial_5.png', 'Sessões transformadoras! A hipnoterapia abriu minha visão sobre traumas antigos. Atendimento humanizado e excelente em Cuiabá.'],
 ] as const;
 
+const postPath = (post: (typeof posts)[number]) => `/blog/${post.id}-${post.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+
+function InstagramFeedWidget() {
+  useEffect(() => {
+    const source = 'https://elfsightcdn.com/platform.js';
+    if (document.querySelector(`script[src="${source}"]`)) return;
+
+    const script = document.createElement('script');
+    script.src = source;
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+  return (
+    <div id="instagram-widget-container">
+      <div className="elfsight-app-34c93b32-a1bb-4039-b184-64439452c1ac" data-elfsight-app-lazy />
+    </div>
+  );
+}
+
 function Home() {
   const [reviewIndex, setReviewIndex] = useState(0);
-  const [modalPost, setModalPost] = useState<(typeof posts)[number] | null>(null);
   const visibleReviews = 3;
   const maxReviewIndex = reviews.length - visibleReviews;
   const recentPosts = posts.slice(0, 3);
@@ -295,36 +316,7 @@ function Home() {
         <section className="instagram-section-wrapper" id="instagram">
           <h2>Me acompanhe no Instagram</h2>
           <p>Conteúdos diários sobre mente, emoções e desenvolvimento pessoal.</p>
-          <div id="instagram-widget-container">
-            <div className="insta-grid">
-              {[
-                ['instagram_cozy_room.png', 'Sala de atendimento aconchegante'],
-                ['instagram_meditation.png', 'Mulher meditando ao pôr do sol'],
-                ['instagram_tea_book.png', 'Chá e caderno aberto'],
-                ['instagram_plant.png', 'Planta em luz de sol'],
-                ['instagram_smiling_woman.png', 'Dra Val Fernandes'],
-                ['instagram_writing_candle.png', 'Vela e caderno'],
-              ].map(([image, alt], index) => (
-                <a className="insta-link-card" href="https://www.instagram.com/valfernandes.oficial/" target="_blank" rel="noopener" key={image} data-testid={`link-instagram-image-${index + 1}`}>
-                  <img src={asset(image)} alt={alt} />
-                  <span className="insta-hover-overlay">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                      <circle cx="12" cy="13" r="4" />
-                    </svg>
-                  </span>
-                </a>
-              ))}
-            </div>
-            <a className="button instagram-outline-button" id="instagram-link" href="https://www.instagram.com/valfernandes.oficial/" target="_blank" rel="noopener" data-testid="link-instagram-profile">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-              </svg>
-              Ver no Instagram
-            </a>
-          </div>
+          <InstagramFeedWidget />
         </section>
 
         <section className="section blog-section-wrapper" id="artigos">
@@ -333,7 +325,7 @@ function Home() {
             <h2>Artigos para sua jornada</h2>
           </div>
           <div className="blog-grid">
-            {recentPosts.map((post) => <BlogCard key={post.id} post={post} onRead={() => setModalPost(post)} />)}
+            {recentPosts.map((post) => <BlogCard key={post.id} post={post} />)}
           </div>
           <div style={{ textAlign: 'center', marginTop: 40 }}>
             <Link href="/blog.html" className="button" data-testid="link-all-posts">Ver todos os posts</Link>
@@ -344,7 +336,6 @@ function Home() {
       </main>
       <Footer />
       <FloatingWhatsApp />
-      {modalPost && <ArticleModal post={modalPost} onClose={() => setModalPost(null)} />}
     </div>
   );
 }
@@ -405,7 +396,7 @@ function RelationshipAppeals() {
   );
 }
 
-function BlogCard({ post, onRead }: { post: (typeof posts)[number]; onRead: () => void }) {
+function BlogCard({ post }: { post: (typeof posts)[number] }) {
   return (
     <article className="blog-card" data-testid={`card-blog-${post.id}`}>
       <img src={asset(post.image)} alt={post.title} />
@@ -413,23 +404,49 @@ function BlogCard({ post, onRead }: { post: (typeof posts)[number]; onRead: () =
         <span className="blog-category">{post.category}</span>
         <h3>{post.title}</h3>
         <p>{post.excerpt}</p>
-        <button className="read-more-btn" type="button" onClick={onRead} data-testid={`button-read-post-${post.id}`}>Ler artigo completo <ArrowRight size={14} /></button>
+        <Link className="read-more-btn" href={postPath(post)} data-testid={`link-read-post-${post.id}`}>Ler artigo completo <ArrowRight size={14} /></Link>
       </div>
     </article>
   );
 }
 
-function ArticleModal({ post, onClose }: { post: (typeof posts)[number]; onClose: () => void }) {
+function ArticlePage() {
+  const { slug } = useParams<{ slug: string }>();
+  const post = posts.find((item) => postPath(item).split('/').pop() === slug);
+
+  useEffect(() => {
+    if (!post) return;
+    const previousTitle = document.title;
+    document.title = `${post.title} | Val Fernandes`;
+    return () => { document.title = previousTitle; };
+  }, [post]);
+
+  if (!post) return <NotFoundFallback />;
+
   return (
-    <div className="modal-overlay" role="presentation" onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-      <div className="modal-content" role="dialog" aria-modal="true" aria-labelledby="article-title">
-        <button className="modal-close" type="button" onClick={onClose} aria-label="Fechar artigo" data-testid="button-close-article"><X size={24} /></button>
-        <span className="blog-category">{post.category}</span>
-        <h2 id="article-title" style={{ marginBottom: 14 }}>{post.title}</h2>
-        <img src={asset(post.image)} alt="" style={{ width: '100%', maxHeight: 280, objectFit: 'cover', borderRadius: 12, marginBottom: 20 }} />
-        <div className="modal-body-copy">{post.content.split('\n\n').map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
-        <a className="button" href={whatsappLink(welcomeMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-article-whatsapp"><WhatsAppIcon /> Agendar uma sessão sobre este tema</a>
-      </div>
+    <div className="site-shell">
+      <Header />
+      <main>
+        <section className="article-page-hero">
+          <span className="blog-category">{post.category}</span>
+          <h1>{post.title}</h1>
+          <p>{post.date}</p>
+        </section>
+        <article className="article-page-content">
+          <Link href="/blog.html" className="article-back-link" data-testid="link-article-back">← Voltar para artigos</Link>
+          <img className="article-cover-image" src={asset(post.image)} alt="" />
+          <div className="article-body-copy">
+            {post.content.split('\n\n').map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
+          <div className="article-cta">
+            <h2>Quer conversar sobre este tema?</h2>
+            <p>Estou aqui para acolher sua história e ajudar você a dar o próximo passo.</p>
+            <a className="button" href={whatsappLink(welcomeMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-article-whatsapp"><WhatsAppIcon /> Agendar uma sessão</a>
+          </div>
+        </article>
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }
@@ -556,7 +573,9 @@ function ServicePage({ kind }: { kind: ServiceKind }) {
       <footer className="service-footer">
         <span>© 2026 Val Fernandes. Todos os direitos reservados.</span>
         <a className="gestoron-signature" href="https://gestoron.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Desenvolvido e hospedado por Gestoron" data-testid={`link-gestoron-${kind}`}>
-          <img className="gestoron-signature-image" src={gestoronSignatureImage} alt="Gestoron" />
+          <span className="gestoron-top-area">
+            <img className="gestoron-signature-image" src={gestoronSignatureImage} alt="Gestoron" />
+          </span>
           <span className="gestoron-static-text">Desenvolvido e hospedado por</span>
         </a>
       </footer>
@@ -567,7 +586,6 @@ function ServicePage({ kind }: { kind: ServiceKind }) {
 function BlogPage() {
   const [category, setCategory] = useState('Todos');
   const [query, setQuery] = useState('');
-  const [modalPost, setModalPost] = useState<(typeof posts)[number] | null>(null);
   const categories = ['Todos', ...Array.from(new Set(posts.map((post) => post.category)))];
   const filtered = useMemo(() => posts.filter((post) => {
     const categoryMatch = category === 'Todos' || post.category === category;
@@ -586,12 +604,11 @@ function BlogPage() {
           <label className="search-box"><Search size={16} /><span className="sr-only">Pesquisar artigos</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Pesquisar artigos..." data-testid="input-blog-search" /></label>
         </section>
         <section className="blog-container">
-          {filtered.length > 0 ? <div className="blog-grid">{filtered.map((post) => <BlogCard key={post.id} post={post} onRead={() => setModalPost(post)} />)}</div> : <p className="no-results" data-testid="text-no-results">Nenhum artigo encontrado para a busca selecionada.</p>}
+          {filtered.length > 0 ? <div className="blog-grid">{filtered.map((post) => <BlogCard key={post.id} post={post} />)}</div> : <p className="no-results" data-testid="text-no-results">Nenhum artigo encontrado para a busca selecionada.</p>}
         </section>
       </main>
       <Footer />
       <FloatingWhatsApp />
-      {modalPost && <ArticleModal post={modalPost} onClose={() => setModalPost(null)} />}
     </div>
   );
 }
@@ -648,6 +665,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/blog.html" component={BlogPage} />
         <Route path="/blog" component={BlogPage} />
+        <Route path="/blog/:slug" component={ArticlePage} />
         <Route path="/mentoria"><ServicePage kind="mentoria" /></Route>
         <Route path="/processo-terapeutico"><ServicePage kind="processo" /></Route>
         <Route path="/politica-de-privacidade.html"><LegalPage kind="privacy" /></Route>
