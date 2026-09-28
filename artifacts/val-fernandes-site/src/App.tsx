@@ -32,7 +32,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const asset = (file: string) => `${base}/assets/${file}`;
 const whatsapp = 'https://wa.me/5565992199578';
 const whatsappLink = (message?: string) => `${whatsapp}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
-const gestoronSignatureImage = 'http://anzolin.adv.br/wp-content/uploads/2026/05/Maison__16_-removebg-preview-e1778691824313.png';
+const gestoronSignatureImage = 'https://gestoron.com.br/wp-content/uploads/2025/09/WhatsApp_Image_2025-09-17_at_09.39.14__1_-removebg-preview-e1758132483985.png';
 
 const relationshipMessage = 'Olá, Val! Quero salvar meu relacionamento e gostaria de saber como funciona o atendimento.';
 const separationMessage = 'Olá, Val! Preciso de ajuda para me curar dessa separação e gostaria de agendar uma conversa.';
