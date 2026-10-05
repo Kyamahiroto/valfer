@@ -10,7 +10,6 @@ import {
   CircleUserRound,
   Compass,
   Heart,
-  LineChart,
   Mail,
   MapPin,
   Menu,
@@ -37,7 +36,6 @@ const gestoronSignatureImage = 'https://gestoron.com.br/wp-content/uploads/2025/
 const relationshipMessage = 'Olá, Val! Quero salvar meu relacionamento e gostaria de saber como funciona o atendimento.';
 const separationMessage = 'Olá, Val! Preciso de ajuda para me curar dessa separação e gostaria de agendar uma conversa.';
 const welcomeMessage = 'Olá, Val! Gostaria de agendar minha sessão de acolhimento.';
-const mentoriaMessage = 'Olá, Val! Tenho interesse na Mentoria Academia da Mente. Pode me passar mais informações?';
 const processoMessage = 'Olá, Val! Tenho interesse no Processo Terapêutico. Gostaria de saber mais e agendar uma conversa.';
 
 type IconType = typeof Heart;
@@ -76,7 +74,7 @@ function Header() {
         <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
           <li><a href="/#inicio" className="nav-link" onClick={closeMenu} data-testid="link-sobre">Sobre</a></li>
           <li><Link href="/processo-terapeutico" className="nav-link" onClick={closeMenu} data-testid="link-processo-nav">Processo Terapêutico</Link></li>
-          <li><Link href="/mentoria" className="nav-link" onClick={closeMenu} data-testid="link-mentoria-nav">Mentoria Academia da Mente</Link></li>
+          <li><Link href="/terapia-de-relacionamento" className="nav-link" onClick={closeMenu} data-testid="link-relationship-nav">Terapia de relacionamento</Link></li>
           <li><Link href="/blog.html" className="nav-link" onClick={closeMenu} data-testid="link-blog-nav">Blog</Link></li>
           <li><a href="/#contato" className="nav-link" onClick={closeMenu} data-testid="link-contato">Contato</a></li>
         </ul>
@@ -215,7 +213,7 @@ function Home() {
             <div className="hero-content">
               <span className="eyebrow">Psicanálise &amp; Inteligência Emocional</span>
               <h1>Transforme sua mente, transforme sua vida.</h1>
-              <p>Apoio terapêutico e mentoria para você se conhecer profundamente, curar emoções e viver com mais leveza, autenticidade e propósito.</p>
+              <p>Acompanhamento terapêutico para compreender suas emoções, fortalecer seus vínculos e viver com mais leveza, autenticidade e propósito.</p>
               <div className="hero-actions">
                 <a className="button" href={whatsappLink(welcomeMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-hero-whatsapp"><WhatsAppIcon /> Agendar conversa</a>
                 <a className="outline-button" href="#processo" data-testid="link-hero-process">Conheça meu trabalho <ArrowRight size={16} /></a>
@@ -237,11 +235,11 @@ function Home() {
             </div>
           </article>
           <article className="service-overlap-card">
-            <div className="card-icon-wrapper"><Brain size={29} /></div>
+            <div className="card-icon-wrapper"><Heart size={29} /></div>
             <div className="card-info">
-              <h3>Mentoria Academia da Mente</h3>
-              <p>Descubra como reprogramar sua mente para o sucesso com nossa mentoria exclusiva.</p>
-              <Link href="/mentoria" className="more-link" data-testid="link-mentoria-card">Saiba mais <ArrowRight size={14} /></Link>
+              <h3>Terapia de relacionamento</h3>
+              <p>Acolhimento para fortalecer o vínculo, atravessar crises e construir novas formas de diálogo.</p>
+              <Link href="/terapia-de-relacionamento" className="more-link" data-testid="link-relationship-card">Saiba mais <ArrowRight size={14} /></Link>
             </div>
           </article>
         </section>
@@ -345,10 +343,16 @@ function RelationshipAppeals() {
     <>
       <section className="relationship-appeal relationship-appeal--relationship" id="relacionamentos">
         <div className="appeal-layout">
-          <div className="appeal-visual">
-            <span className="eyebrow">Um cuidado para o seu momento</span>
+          <div className="appeal-visual appeal-visual--relationship">
+            <span className="eyebrow">Terapia de relacionamento</span>
+            <h3>Um cuidado para o seu momento</h3>
             <div className="appeal-visual-icon"><Heart size={58} strokeWidth={1.25} /></div>
-            <p>Quando ainda existe amor, buscar apoio também é uma forma de cuidar da história que vocês construíram.</p>
+            <p>Um espaço acolhedor para cuidar do vínculo, compreender padrões e encontrar caminhos mais conscientes — juntos ou em um recomeço.</p>
+            <div className="relationship-service-tags" aria-label="Focos do atendimento">
+              <span>Diálogo</span>
+              <span>Reconexão</span>
+              <span>Recomeços</span>
+            </div>
           </div>
           <article className="appeal-content">
             <span className="eyebrow">Para quem está dentro da relação</span>
@@ -393,6 +397,35 @@ function RelationshipAppeals() {
         </div>
       </section>
     </>
+  );
+}
+
+function RelationshipPage() {
+  return (
+    <div className="site-shell">
+      <Header />
+      <main>
+        <section className="relationship-service-hero">
+          <div className="relationship-service-hero-inner">
+            <div className="relationship-service-hero-copy">
+              <span className="eyebrow">Cuidado para os vínculos</span>
+              <h1>Terapia de relacionamento</h1>
+              <p>Um espaço seguro para melhorar a comunicação, cuidar de conflitos recorrentes e decidir os próximos passos com mais clareza — como casal ou depois de uma separação.</p>
+              <a className="button" href={whatsappLink(relationshipMessage)} target="_blank" rel="noopener noreferrer" data-testid="link-relationship-page-whatsapp">
+                <WhatsAppIcon /> Agendar uma conversa
+              </a>
+            </div>
+            <div className="relationship-service-hero-art" aria-hidden="true">
+              <Heart size={92} strokeWidth={1.1} />
+              <span>Escuta · Diálogo · Reconexão</span>
+            </div>
+          </div>
+        </section>
+        <RelationshipAppeals />
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
+    </div>
   );
 }
 
@@ -472,28 +505,9 @@ function ContactSection() {
   );
 }
 
-type ServiceKind = 'mentoria' | 'processo';
+type ServiceKind = 'processo';
 
 const serviceContent = {
-  mentoria: {
-    label: 'Mentoria exclusiva',
-    title: <>Domine sua <span>mente e emoções</span></>,
-    subtitle: 'Um programa intensivo de 12 encontros para você que deseja sair da estagnação, eliminar a autossabotagem e construir uma vida de realização plena.',
-    cta: mentoriaMessage,
-    sectionTitle: 'O mapa da sua jornada',
-    sectionDescription: '12 encontros ao vivo e online para reescrever sua história com clareza, método e constância.',
-    features: [
-      ['Clareza radical', 'Vamos identificar exatamente onde você está e onde quer chegar, eliminando a névoa mental que impede o caminho.', Compass],
-      ['Reprogramação emocional', 'Ferramentas práticas para ressignificar traumas e bloqueios que agem no seu inconsciente.', Brain],
-      ['Estratégia e ação', 'Você sai com um plano validado para executar seus objetivos e sustentar seus próximos passos.', LineChart],
-    ] as [string, string, IconType][],
-    timeline: [
-      ['01', 'Planejamento estratégico', 'Definição de sonhos e propósito inabalável.'],
-      ['02', 'Gestão emocional', 'Blindagem emocional para lidar com desafios sem perder a direção.'],
-      ['03', 'Comunicação assertiva', 'Conexão verdadeira através da compreensão dos perfis e necessidades.'],
-      ['04', 'Felicidade autêntica', 'Princípios para uma vida prazerosa, equilibrada e com significado.'],
-    ],
-  },
   processo: {
     label: 'Método exclusivo',
     title: <>Sua nova versão em <span>6 semanas</span></>,
@@ -628,7 +642,7 @@ const privacySections = [
 
 const termsSections = [
   ['1. Aceitação dos Termos', <p>Ao acessar e utilizar o site <strong>valfernandes.com.br</strong>, você concorda com estes Termos de Uso e com a nossa <Link href="/politica-de-privacidade.html">Política de Privacidade</Link>.</p>],
-  ['2. Descrição dos Serviços', <><p>O site apresenta informações sobre Psicanálise Clínica, Hipnoterapia Clínica, Mentoria em Inteligência Emocional, PNL e Constelação Familiar Sistêmica.</p><p>O conteúdo tem caráter informativo e educacional, e <strong>não substitui</strong> diagnósticos médicos, tratamentos psiquiátricos ou acompanhamento psicológico profissional.</p></>],
+  ['2. Descrição dos Serviços', <><p>O site apresenta informações sobre Processo Terapêutico e Terapia de Relacionamento, com abordagens de Psicanálise Clínica, Hipnoterapia Clínica, PNL e Constelação Familiar Sistêmica.</p><p>O conteúdo tem caráter informativo e educacional, e <strong>não substitui</strong> diagnósticos médicos, tratamentos psiquiátricos ou acompanhamento psicológico profissional.</p></>],
   ['3. Agendamento e Atendimento', <><p>O agendamento é realizado por WhatsApp ou canais indicados no site.</p><ul><li>As sessões podem ser presenciais em Cuiabá-MT ou online.</li><li>Cancelamentos devem ser comunicados com no mínimo <strong>24 horas</strong> de antecedência.</li><li>Informações sobre valores são fornecidas no momento do agendamento.</li></ul></>],
   ['4. Propriedade Intelectual', <p>Todo o conteúdo — textos, imagens, logotipos, vídeos, gráficos e design — pertence a Val Fernandes ou é utilizado com autorização. Artigos podem ser compartilhados com atribuição à autora.</p>],
   ['5. Responsabilidades do Usuário', <p>O usuário compromete-se a fornecer informações verdadeiras, não utilizar o site para finalidades ilegais e respeitar o sigilo e a ética envolvidos no processo terapêutico.</p>],
@@ -666,7 +680,7 @@ function Router() {
         <Route path="/blog.html" component={BlogPage} />
         <Route path="/blog" component={BlogPage} />
         <Route path="/blog/:slug" component={ArticlePage} />
-        <Route path="/mentoria"><ServicePage kind="mentoria" /></Route>
+        <Route path="/terapia-de-relacionamento" component={RelationshipPage} />
         <Route path="/processo-terapeutico"><ServicePage kind="processo" /></Route>
         <Route path="/politica-de-privacidade.html"><LegalPage kind="privacy" /></Route>
         <Route path="/termos-de-uso.html"><LegalPage kind="terms" /></Route>

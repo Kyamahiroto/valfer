@@ -175,9 +175,22 @@
 .relationship-appeal--separation .appeal-layout { grid-template-columns: 1.18fr .82fr; }
 .appeal-visual { display: flex; flex-direction: column; justify-content: center; min-height: 390px; padding: 44px; border-radius: 25px; background: var(--bg-dark); color: var(--text-light); box-shadow: 0 22px 50px rgba(27,38,27,.16); }
 .appeal-visual .eyebrow { color: var(--gold-light); }
+.appeal-visual h3 { max-width: 390px; margin: 10px 0 0; color: var(--text-light); font-family: var(--app-font-serif); font-size: clamp(30px, 3.3vw, 42px); letter-spacing: -.6px; line-height: 1.12; }
+.appeal-visual--relationship { position: relative; overflow: hidden; background: radial-gradient(circle at 100% 0%, rgba(209,170,92,.18), transparent 36%), linear-gradient(145deg, #253b2b, #18291d); }
+.appeal-visual--relationship::after { content: ''; position: absolute; top: -96px; right: -88px; width: 230px; height: 230px; border: 1px solid rgba(209,170,92,.2); border-radius: 50%; pointer-events: none; }
 .appeal-visual--soft { background: linear-gradient(145deg, #253b2b, #18291d); }
-.appeal-visual-icon { display: grid; place-items: center; width: 116px; height: 116px; margin: 26px 0 30px; border: 1px solid rgba(209,170,92,.48); border-radius: 50%; color: var(--gold-light); }
+.appeal-visual-icon { display: grid; place-items: center; width: 116px; height: 116px; margin: 24px 0; border: 1px solid rgba(209,170,92,.48); border-radius: 50%; color: var(--gold-light); }
 .appeal-visual p { max-width: 330px; color: var(--text-light-muted); font-size: 16px; line-height: 1.7; }
+.relationship-service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.relationship-service-tags span { padding: 7px 12px; border: 1px solid rgba(209,170,92,.35); border-radius: 999px; color: var(--gold-light); font-size: 11px; font-weight: 700; letter-spacing: .2px; }
+.relationship-service-hero { padding: 100px 24px; background: linear-gradient(180deg, #fdfbf7 0%, #f3ece1 100%); }
+.relationship-service-hero-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 72px; width: min(1140px, 100%); margin: auto; }
+.relationship-service-hero-copy h1 { max-width: 700px; margin: 12px 0 20px; font-size: clamp(46px, 6vw, 70px); letter-spacing: -1.4px; }
+.relationship-service-hero-copy p { max-width: 620px; margin-bottom: 28px; color: var(--text-muted); font-size: 17px; line-height: 1.7; }
+.relationship-service-hero-art { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; width: min(100%, 360px); aspect-ratio: 1; margin: auto; border: 1px solid rgba(189,148,70,.32); border-radius: 50%; background: radial-gradient(circle at 45% 40%, #fffaf3 0%, #f3e9d5 72%, #eadcc1 100%); color: var(--gold-primary); box-shadow: 0 25px 60px rgba(115,108,96,.12); }
+.relationship-service-hero-art::before, .relationship-service-hero-art::after { content: ''; position: absolute; inset: 18px; border: 1px solid rgba(189,148,70,.18); border-radius: 50%; }
+.relationship-service-hero-art::after { inset: -12px; opacity: .55; }
+.relationship-service-hero-art span { color: var(--text-primary); font-size: 12px; font-weight: 800; letter-spacing: .6px; }
 .appeal-content { display: flex; flex-direction: column; justify-content: center; padding: 18px 0; }
 .appeal-content h2 { max-width: 620px; margin-bottom: 18px; font-size: clamp(35px,4vw,53px); letter-spacing: -.8px; }
 .appeal-content > p { max-width: 650px; color: var(--text-muted); font-size: 15px; line-height: 1.75; }
@@ -381,6 +394,11 @@
   .service-header { padding: 14px 20px; }
   .service-brand span { display: none; }
   .service-hero { padding: 90px 20px 76px; }
+  .relationship-service-hero { padding: 72px 20px; }
+  .relationship-service-hero-inner { grid-template-columns: 1fr; gap: 42px; text-align: center; }
+  .relationship-service-hero-copy p { margin-right: auto; margin-left: auto; }
+  .relationship-service-hero-copy .button { margin: 0 auto; }
+  .relationship-service-hero-art { width: min(80vw, 290px); }
   .service-section { padding: 70px 20px; }
   .feature-grid { grid-template-columns: 1fr; }
   .timeline-item { gap: 14px; }
